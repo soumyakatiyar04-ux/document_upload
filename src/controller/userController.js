@@ -1,20 +1,20 @@
 const connection = require("../config/db");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 const getUser = async (req, res) => {
   try {
-    let query = `SELECT * from user`;
-    let result = await connection.execute(query);
+    const query = `SELECT user_id, name, email FROM user`;
+
+    const [rows] = await connection.execute(query);
 
     res.status(200).json({
-      message: "Data feched successfully",
-      data: result
+      message: "Data fetched successfully",
+      data: rows
     });
+
   } catch (error) {
     res.status(500).json({
-      message: "Error feching Users",
-      error: error.message,
+      message: "Error fetching users",
+      error: error.message
     });
   }
 };

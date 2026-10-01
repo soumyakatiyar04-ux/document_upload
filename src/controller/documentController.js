@@ -85,7 +85,7 @@ const deleteDocument = async (req, res) => {
     try {
         const {id} = req.params;
         const [documents] = await connection.execute(
-            "SELECT s3_key FROM documents WHERE id = ?",
+            "SELECT s3_key, original_name FROM documents WHERE id = ?",
             [id]
         );
         console.log("Documents:", documents);

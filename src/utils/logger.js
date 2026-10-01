@@ -10,13 +10,10 @@ const putCloudwatchLog = async (level, message, data = {}) => {
         message: message,
         ...data
     };
-
     const logMessage = JSON.stringify(logData);
 
     console.log(logMessage);
-
     try {
-
         await cloudwatchLog.send(
             new PutLogEventsCommand({
                 logGroupName: process.env.AWS_CLOUDWATCH_LOG_GROUP,
@@ -30,11 +27,8 @@ const putCloudwatchLog = async (level, message, data = {}) => {
                 ]
             })
         );
-
         console.log("CloudWatch log sent successfully");
-
     } catch (err) {
-
         console.log(
             "CloudWatch logging failed:",
             err.message
